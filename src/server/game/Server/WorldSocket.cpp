@@ -587,6 +587,7 @@ void WorldSocket::HandleAuthSessionCallback(std::shared_ptr<AuthSession> authSes
         return;
     }
 
+    #ifndef _DEBUG // When in release build, perform the realm-id check; otherwise, skip it to speed up the workflow
     if (authSession->RealmID != realm.Id.Realm)
     {
         SendAuthResponseError(REALM_LIST_REALM_NOT_FOUND);
@@ -595,6 +596,7 @@ void WorldSocket::HandleAuthSessionCallback(std::shared_ptr<AuthSession> authSes
         DelayedCloseSocket();
         return;
     }
+    #endif
 
     // Must be done before WorldSession is created
     bool wardenActive = sWorld->getBoolConfig(CONFIG_WARDEN_ENABLED);
