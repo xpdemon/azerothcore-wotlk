@@ -180,6 +180,13 @@ COPY --chown=$DOCKER_USER:$DOCKER_USER \
      --from=build \
      /azerothcore/env/dist/bin/worldserver /azerothcore/env/dist/bin/worldserver
 
+COPY --chown=$DOCKER_USER:$DOCKER_USER \
+          --from=build \
+          /azerothcore/modules/mod-playerbots/sql/playerbots/base /azerothcore/modules/mod-playerbots/sql/playerbots/base
+
+COPY --chown=$DOCKER_USER:$DOCKER_USER  --from=build \
+  /azerothcore/modules/mod-arac/patch-contents/DBFilesContent/* /azerothcore/env/dist/data/dbc/
+
 VOLUME /azerothcore/env/dist/etc
 
 CMD ["worldserver"]
@@ -198,7 +205,7 @@ ENV ACORE_COMPONENT=dbimport
 
 COPY --chown=$DOCKER_USER:$DOCKER_USER \
     data data
-
+### TEST SANS
 COPY --chown=$DOCKER_USER:$DOCKER_USER \
     modules modules
 
