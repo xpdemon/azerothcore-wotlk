@@ -264,3 +264,9 @@ COPY --chown=$DOCKER_USER:$DOCKER_USER --from=build \
 
 COPY --chown=$DOCKER_USER:$DOCKER_USER --from=build \
   /azerothcore/env/dist/bin/vmap4_extractor /azerothcore/env/dist/bin/vmap4_extractor
+
+
+
+
+
+
