@@ -181,8 +181,8 @@ COPY --chown=$DOCKER_USER:$DOCKER_USER \
      /azerothcore/env/dist/bin/worldserver /azerothcore/env/dist/bin/worldserver
 
 COPY --chown=$DOCKER_USER:$DOCKER_USER \
-          --from=build \
-          /azerothcore/modules/mod-playerbots/sql/playerbots/base /azerothcore/modules/mod-playerbots/sql/playerbots/base
+         --from=build \
+         /azerothcore/modules/mod-playerbots/* /azerothcore/modules/mod-playerbots/
 
 COPY --chown=$DOCKER_USER:$DOCKER_USER  --from=build \
   /azerothcore/modules/mod-arac/patch-contents/DBFilesContent/* /azerothcore/env/dist/data/dbc/
