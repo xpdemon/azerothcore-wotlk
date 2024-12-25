@@ -1,0 +1,21 @@
+[submodule "modules/mod-ah-bot"]
+	path = modules/mod-ah-bot
+	url = https://github.com/xpdemon/mod-ah-bot.git
+[submodule "modules/mod-arac"]
+	path = modules/mod-arac
+	url = https://github.com/xpdemon/mod-arac.git
+[submodule "modules/mod-playerbots"]
+	path = modules/mod-playerbots
+	url = https://github.com/xpdemon/mod-playerbots.git
+[submodule "modules/mod-npc-enchanter"]
+	path = modules/mod-npc-enchanter
+	url = https://github.com/xpdemon/mod-npc-enchanter.git
+[submodule "modules/mod-transmog"]
+	path = modules/mod-transmog
+	url = https://github.com/xpdemon/mod-transmog.git
+[submodule "modules/mod-learn-spells"]
+	path = modules/mod-learn-spells
+	url = https://github.com/xpdemon/mod-learn-spells.git
+[submodule "modules/mod-login-rewards"]
+	path = modules/mod-login-rewards
+	url = https://github.com/xpdemon/mod-login-rewards.git
