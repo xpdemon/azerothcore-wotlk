@@ -28,7 +28,7 @@ RUN mkdir -pv \
         /azerothcore/build
 
 # Configure Timezone
-RUN apt-get update                                                       \
+RUN apt-get update  \
     && apt-get install -y --no-install-recommends tzdata ca-certificates \
     && ln -snf "/usr/share/zoneinfo/$TZ" /etc/localtime                  \
     && echo "$TZ" > /etc/timezone                                          \
