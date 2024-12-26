@@ -1,9 +1,9 @@
-name: Docker Build Cloud
+name: Docker Build and Push
 
 on:
   push:
     tags:
-      - 'v*'
+      - 'v*'   # Déclenche le workflow pour les tags commençant par 'v'
 
 jobs:
   docker-build:
@@ -13,26 +13,40 @@ jobs:
       # Étape 1 : Checkout du code
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          repository: xpdemon/azerothcore-wotlk
+          ref: ${{ github.ref }}
+          fetch-depth: 0  # Assurez-vous de récupérer tous les tags
+          submodules: false  # Désactivé initialement
 
-      # Étape 2 : Connexion à Docker Hub
+      # Étape 2 : Mise à jour des sous-modules Git
+      - name: Update Git submodules
+        run: git submodule update --init --recursive
+
+      # Étape 3 : Connexion à Docker Hub
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ vars.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PAT }}
 
+      # Étape 5 : Configurer Docker Buildx avec le pilote docker-container
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
           driver: docker-container  # Utilisation du pilote docker-container
           install: true
-          builder: default
 
-      # Étape 5 : Construire les images avec Docker Compose
+
+      # Étape 7 : Construire les images avec Docker Compose
       - name: Build Docker Compose services
         run: docker compose -f docker-compose.override.yml build
 
-      # Étape 6 : Pousser les images construites vers Docker Hub
+      # Étape 8 : Pousser les images vers Docker Hub
       - name: Push Docker Compose services
         run: docker compose -f docker-compose.override.yml push
 
+      # Optionnel : Nettoyer le cache Buildx
+      - name: Cleanup Buildx
+        if: always()
+        run: docker buildx prune --force
