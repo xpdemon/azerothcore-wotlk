@@ -2,8 +2,8 @@ name: Docker Build Cloud
 
 on:
   push:
-    branches:
-      - main  # Remplacez par votre branche principale si nécessaire
+    tags:
+      - 'v*'
 
 jobs:
   docker-build:
