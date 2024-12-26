@@ -1,3 +1,4 @@
+
 # docker-compose.yml for AzerothCore.
 #
 # Start the server with `docker compose up -d --build`
@@ -28,7 +29,7 @@ services:
 
   ac-db-import:
     container_name: ac-db-import
-    image: xpdemon/ac-wotlk-db-import:latest
+    image: xpdemon/ac-wotlk-db-import:0.0.1
     networks:
       - ac-network
     build:
