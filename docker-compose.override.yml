@@ -29,7 +29,7 @@ services:
 
   ac-db-import:
     container_name: ac-db-import
-    image: xpdemon/ac-wotlk-db-import:0.0.1
+    image: xpdemon/ac-wotlk-db-import:0.0.2
     networks:
       - ac-network
     build:
@@ -58,7 +58,7 @@ services:
 
   ac-worldserver:
     container_name: ac-worldserver
-    image: xpdemon/ac-wotlk-worldserver:latest
+    image: xpdemon/ac-wotlk-worldserver:0.0.2
     build:
       platforms:
         - linux/amd64
@@ -102,7 +102,7 @@ services:
 
   ac-authserver:
     container_name: ac-authserver
-    image: xpdemon/ac-wotlk-authserver:latest
+    image: xpdemon/ac-wotlk-authserver:0.0.2
     build:
       platforms:
         - linux/amd64
@@ -137,7 +137,7 @@ services:
 
   ac-client-data-init:
     container_name: ac-client-data-init
-    image: xpdemon/ac-wotlk-client-data:latest
+    image: xpdemon/ac-wotlk-client-data:0.0.2
     build:
       platforms:
         - linux/amd64
