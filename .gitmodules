@@ -22,3 +22,6 @@
 [submodule "modules/mod-congrats-on-level"]
 	path = modules/mod-congrats-on-level
 	url = https://github.com/xpdemon/mod-congrats-on-level.git
+[submodule "modules/mod-custom-login"]
+	path = modules/mod-custom-login
+	url = https://github.com/xpdemon/mod-custom-login.git
