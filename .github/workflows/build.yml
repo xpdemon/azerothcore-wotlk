@@ -1,39 +1,49 @@
-name: Docker Build Cloud
+name: Docker Build and Push
 
 on:
   push:
     tags:
-      - 'v*'
+      - 'v*'   # Déclenche le workflow pour les tags commençant par 'v'
+    branches:
+      - 'develop'     # Déclenchement sur la branche 'develop'
 
 jobs:
   docker-build:
     runs-on: ubuntu-latest
 
+
     steps:
-      # Étape 1 : Checkout du code
+      # Étape 1 : Checkout du code avec les sous-modules
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          submodules: true  # Assure que les sous-modules sont également clonés
 
-      # Étape 2 : Connexion à Docker Hub
+      # Étape 3 : Connexion à Docker Hub
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_USER }}
+          username: ${{ vars.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PAT }}
 
+      # Étape 5 : Configurer Docker Buildx avec le pilote docker-container
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
-          version: "lab:latest"
-          driver: cloud
-          endpoint: "${{ vars.DOCKER_USER }}/xp-cloud-builder"
+          driver: docker-container  # Utilisation du pilote docker-container
           install: true
 
-      # Étape 5 : Construire les images avec Docker Compose
+
+      # Étape 7 : Construire les images avec Docker Compose
       - name: Build Docker Compose services
         run: docker compose -f docker-compose.override.yml build
 
-      # Étape 6 : Pousser les images construites vers Docker Hub
+      # Étape 8 : Pousser les images vers Docker Hub
       - name: Push Docker Compose services
+        if: startsWith(github.ref, 'refs/tags/')
         run: docker compose -f docker-compose.override.yml push
 
+      # Optionnel : Nettoyer le cache Buildx
+      - name: Cleanup Buildx
+        if: always()
+        run: docker buildx prune --force
