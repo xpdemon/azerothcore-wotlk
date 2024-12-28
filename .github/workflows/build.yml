@@ -48,6 +48,24 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         run: docker compose -f docker-compose.override.yml push
 
+      # Étape 6 : Créer une Pull Request vers master si sur develop
+      - name: Create Pull Request to master
+        # Condition : seulement si on est sur la branche develop ET si les étapes précédentes ont réussi
+        if: github.ref == 'refs/heads/develop' && success()
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+          # Paramètres de la PR
+          title: "Merge develop into master"
+          body: |
+            **Automated PR** pour fusionner les changements de `develop` dans `master`.
+          base: "master"
+
+          # Nom de la branche locale intermédiaire
+          branch: "auto-develop-to-master"
+
+
       # Optionnel : Nettoyer le cache Buildx
       - name: Cleanup Buildx
         if: always()
