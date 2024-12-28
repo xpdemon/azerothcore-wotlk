@@ -25,3 +25,4 @@
 [submodule "modules/mod-custom-login"]
 	path = modules/mod-custom-login
 	url = https://github.com/xpdemon/mod-custom-login.git
+	branch = master
