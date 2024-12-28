@@ -5,32 +5,33 @@ on:
     tags:
       - 'v*'   # Déclenche le workflow pour les tags commençant par 'v'
 
+    branches:
+      - 'develop'     # Déclenchement sur la branche 'develop'
+
+
 jobs:
   docker-build:
     runs-on: ubuntu-latest
 
+
     steps:
-      # Étape 1 : Checkout du code
+      # Étape 1 : Checkout du code avec les sous-modules
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
+          submodules: true  # Assure que les sous-modules sont également clonés
           repository: xpdemon/azerothcore-wotlk
           ref: ${{ github.ref }}
           fetch-depth: 0  # Assurez-vous de récupérer tous les tags
-          submodules: false  # Désactivé initialement
 
-      # Étape 2 : Mise à jour des sous-modules Git
-      - name: Update Git submodules
-        run: git submodule update --init --recursive
-
-      # Étape 3 : Connexion à Docker Hub
+      # Étape 2 : Connexion à Docker Hub
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ vars.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PAT }}
 
-      # Étape 5 : Configurer Docker Buildx avec le pilote docker-container
+      # Étape 3 : Configurer Docker Buildx avec le pilote docker-container
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
@@ -38,12 +39,13 @@ jobs:
           install: true
 
 
-      # Étape 7 : Construire les images avec Docker Compose
+      # Étape 4 : Construire les images avec Docker Compose
       - name: Build Docker Compose services
         run: docker compose -f docker-compose.override.yml build
 
-      # Étape 8 : Pousser les images vers Docker Hub
+      # Étape 5 : Pousser les images vers Docker Hub
       - name: Push Docker Compose services
+        if: startsWith(github.ref, 'refs/tags/')
         run: docker compose -f docker-compose.override.yml push
 
       # Optionnel : Nettoyer le cache Buildx

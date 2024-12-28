@@ -16,6 +16,13 @@
 [submodule "modules/mod-learn-spells"]
 	path = modules/mod-learn-spells
 	url = https://github.com/xpdemon/mod-learn-spells.git
-[submodule "modules/mod-login-rewards"]
-	path = modules/mod-login-rewards
-	url = https://github.com/xpdemon/mod-login-rewards.git
+[submodule "modules/mod-reagent-bank"]
+	path = modules/mod-reagent-bank
+	url = https://github.com/xpdemon/mod-reagent-bank.git
+[submodule "modules/mod-congrats-on-level"]
+	path = modules/mod-congrats-on-level
+	url = https://github.com/xpdemon/mod-congrats-on-level.git
+[submodule "modules/mod-custom-login"]
+	path = modules/mod-custom-login
+	url = https://github.com/xpdemon/mod-custom-login.git
+	branch = master
