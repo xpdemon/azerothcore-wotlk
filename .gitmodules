@@ -26,3 +26,6 @@
 	path = modules/mod-custom-login
 	url = https://github.com/xpdemon/mod-custom-login.git
 	branch = master
+[submodule "modules/mod-guildhouse"]
+	path = modules/mod-guildhouse
+	url = https://github.com/xpdemon/mod-guildhouse.git
