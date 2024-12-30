@@ -1,27 +1,35 @@
 [submodule "modules/mod-ah-bot"]
 	path = modules/mod-ah-bot
 	url = https://github.com/xpdemon/mod-ah-bot.git
+	branch = master
 [submodule "modules/mod-arac"]
 	path = modules/mod-arac
 	url = https://github.com/xpdemon/mod-arac.git
+	branch = master
 [submodule "modules/mod-playerbots"]
 	path = modules/mod-playerbots
 	url = https://github.com/xpdemon/mod-playerbots.git
+	branch = master
 [submodule "modules/mod-npc-enchanter"]
 	path = modules/mod-npc-enchanter
 	url = https://github.com/xpdemon/mod-npc-enchanter.git
+	branch = master
 [submodule "modules/mod-transmog"]
 	path = modules/mod-transmog
 	url = https://github.com/xpdemon/mod-transmog.git
+	branch = master
 [submodule "modules/mod-learn-spells"]
 	path = modules/mod-learn-spells
 	url = https://github.com/xpdemon/mod-learn-spells.git
+	branch = master
 [submodule "modules/mod-reagent-bank"]
 	path = modules/mod-reagent-bank
 	url = https://github.com/xpdemon/mod-reagent-bank.git
+	branch = master
 [submodule "modules/mod-congrats-on-level"]
 	path = modules/mod-congrats-on-level
 	url = https://github.com/xpdemon/mod-congrats-on-level.git
+	branch = master
 [submodule "modules/mod-custom-login"]
 	path = modules/mod-custom-login
 	url = https://github.com/xpdemon/mod-custom-login.git
@@ -29,3 +37,4 @@
 [submodule "modules/mod-guildhouse"]
 	path = modules/mod-guildhouse
 	url = https://github.com/xpdemon/mod-guildhouse.git
+	branch = master

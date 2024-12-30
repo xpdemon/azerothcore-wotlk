@@ -164,7 +164,7 @@ services:
         DB_DUMP_TARGET: /db
         DB_USER : root
         DB_PASS : password
-        DB_DUMP_FREQ : 60
+        DB_DUMP_FREQUENCY : 60
         DB_SERVER : ac-database
         DB_PORT : 3306
     command:
