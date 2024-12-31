@@ -127,11 +127,10 @@ VOLUME /azerothcore/env/dist/etc
 
 ENV PATH="/azerothcore/env/dist/bin:$PATH"
 
-#### GESTION DE CONFLI DE USER_ID
-RUN if getent group "$GROUP_ID" > /dev/null; then groupmod -n "$DOCKER_USER" "$(getent group $GROUP_ID | cut -d: -f1)"; else groupadd --gid "$GROUP_ID" "$DOCKER_USER"; fi && \
-    if id -u "$USER_ID" > /dev/null 2>&1; then usermod -d /azerothcore -l "$DOCKER_USER" "$(getent passwd $USER_ID | cut -d: -f1)"; else useradd -d /azerothcore --uid "$USER_ID" --gid "$GROUP_ID" "$DOCKER_USER"; fi && \
+RUN groupadd --gid "$GROUP_ID"  "$DOCKER_USER" && \
+    useradd -d /azerothcore --uid "$USER_ID"  --gid "$GROUP_ID"  "$DOCKER_USER" && \
     passwd -d "$DOCKER_USER" && \
-    chown -R "$DOCKER_USER:$DOCKER_USER" /azerothcore \
+    chown -R "$DOCKER_USER:$DOCKER_USER" /azerothcore
 
 COPY --chown=$USER_ID:$GROUP_ID \
      --chmod=755 \
