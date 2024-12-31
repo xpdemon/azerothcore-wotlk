@@ -1,4 +1,4 @@
-ARG UBUNTU_VERSION=22.04
+ARG UBUNTU_VERSION=24.04
 ARG TZ=Etc/UTC
 
 # This target lays out the general directory skeleton for AzerothCore,
