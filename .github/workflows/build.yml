@@ -2,10 +2,8 @@ name: Docker Build and Push
 
 on:
   push:
-    tags:
-      - 'v*'   # Déclenche le workflow pour les tags commençant par 'v'
-
     branches:
+      - 'master'      # Déclenchement sur la branche 'master'
       - 'develop'     # Déclenchement sur la branche 'develop'
 
 
@@ -45,7 +43,7 @@ jobs:
 
       # Étape 5 : Pousser les images vers Docker Hub
       - name: Push Docker Compose services
-        if: startsWith(github.ref, 'refs/tags/')
+        if: startsWith(github.ref, 'refs/heads/master')
         run: docker compose -f docker-compose.override.yml push
 
       # Optionnel : Nettoyer le cache Buildx
