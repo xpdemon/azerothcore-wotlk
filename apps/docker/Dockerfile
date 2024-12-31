@@ -63,7 +63,7 @@ ARG CCACHE_LOGFILE=""
 RUN apt-get update                                                     \
     && apt-get install -y --no-install-recommends                         \
         build-essential ccache libtool cmake-data make cmake clang    \
-        git lsb-base curl unzip default-mysql-client openssl                  \
+        git lsb-base curl unzip default-mysql-client openssl  liblzma-dev                  \
         default-libmysqlclient-dev libboost-all-dev libssl-dev libmysql++-dev \
         libreadline-dev zlib1g-dev libbz2-dev libncurses5-dev         \
     && rm -rf /var/lib/apt/lists/*
