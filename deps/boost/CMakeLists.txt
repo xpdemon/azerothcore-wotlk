@@ -30,7 +30,7 @@ if (WIN32)
 elseif(APPLE)
   set(BOOST_REQUIRED_VERSION 1.87)
 else ()
-  set(BOOST_REQUIRED_VERSION 1.83)
+  set(BOOST_REQUIRED_VERSION 1.74)
 endif()
 
 find_package(Boost ${BOOST_REQUIRED_VERSION} REQUIRED system filesystem program_options iostreams regex thread)

@@ -1,4 +1,4 @@
-ARG UBUNTU_VERSION=24.04
+ARG UBUNTU_VERSION=22.04
 ARG TZ=Etc/UTC
 
 # This target lays out the general directory skeleton for AzerothCore,
@@ -63,7 +63,7 @@ ARG CCACHE_LOGFILE=""
 RUN apt-get update                                                     \
     && apt-get install -y --no-install-recommends                         \
         build-essential ccache libtool cmake-data make cmake clang    \
-        git lsb-base curl unzip default-mysql-client openssl  liblzma-dev                  \
+        git lsb-base curl unzip default-mysql-client openssl                  \
         default-libmysqlclient-dev libboost-all-dev libssl-dev libmysql++-dev \
         libreadline-dev zlib1g-dev libbz2-dev libncurses5-dev         \
     && rm -rf /var/lib/apt/lists/*
@@ -127,9 +127,8 @@ VOLUME /azerothcore/env/dist/etc
 
 ENV PATH="/azerothcore/env/dist/bin:$PATH"
 
-#### GESTION DE CONFLI DE USER_ID
-RUN if getent group "$GROUP_ID" > /dev/null; then groupmod -n "$DOCKER_USER" "$(getent group $GROUP_ID | cut -d: -f1)"; else groupadd --gid "$GROUP_ID" "$DOCKER_USER"; fi && \
-    if id -u "$USER_ID" > /dev/null 2>&1; then usermod -d /azerothcore -l "$DOCKER_USER" "$(getent passwd $USER_ID | cut -d: -f1)"; else useradd -d /azerothcore --uid "$USER_ID" --gid "$GROUP_ID" "$DOCKER_USER"; fi && \
+RUN groupadd --gid "$GROUP_ID"  "$DOCKER_USER" && \
+    useradd -d /azerothcore --uid "$USER_ID"  --gid "$GROUP_ID"  "$DOCKER_USER" && \
     passwd -d "$DOCKER_USER" && \
     chown -R "$DOCKER_USER:$DOCKER_USER" /azerothcore
 
