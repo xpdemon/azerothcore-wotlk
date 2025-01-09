@@ -43,7 +43,6 @@ jobs:
 
       # Étape 5 : Pousser les images vers Docker Hub
       - name: Push Docker Compose services
-        if: startsWith(github.ref, 'refs/heads/master')
         run: docker compose -f docker-compose.override.yml push
 
       # Optionnel : Nettoyer le cache Buildx
